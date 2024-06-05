@@ -1,0 +1,38 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+
+<Files create.php>
+AuthName "Restricted Content"
+AuthType Basic
+AuthUserFile C:\xampp\htdocs\MORI_International_Agency_Corp\.htpasswd
+Require valid-user
+</Files>
+
+
+#error pages 
+# ErrorDocument 404 views/error_pages/404.php
+
+#Restricted file
+# enable mod_rewrite
+# RewriteEngine On
+ 
+# RewriteCond = define rule condition
+# HTTP_REFERER = check from where the request originated
+# ! = exclude
+# ^ = start of string
+# [NC] = case insensitive search
+# RewriteCond %{HTTP_REFERER} !^http://localhost/MORI_International_Agency_Corp/public/img/SEC.jpg [NC]
+# RewriteCond %{HTTP_REFERER} !^http://localhost/MORI_International_Agency_Corp/public/img/poea.jpg [NC]
+ 
+# \ = match any
+# . = any character
+# () = pattern, group
+# $ = end of string
+ 
+# [F] = forbidden, 403
+# [L] = stop processing further rules
+# RewriteRule \.(gif|jpg|jpeg|png|mp4|mov|mkv|flv)$ - [F,L]
